@@ -2,5 +2,6 @@
 
 require __DIR__ . '/autoload.php';
 
-$db = new \App\Db();
+$user = \App\Models\User::findAll();
 
+var_dump($user);
