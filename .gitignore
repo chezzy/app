@@ -27,6 +27,7 @@
 # Mongo Explorer plugin:
 # .idea/mongoSettings.xml
 
+/.htaccess
 ## File-based project format:
 *.ipr
 *.iws
