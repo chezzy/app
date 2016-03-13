@@ -56,5 +56,42 @@ class Model
         $sql = 'INSERT INTO ' . static::TABLE . ' (' . implode(',', $columns) . ') VALUES ('. implode(',', array_keys($values)) .')';
         $db = Db::instance();
         $db->execute($sql, $values);
+        $this->id = $db->getId();
+    }
+
+    public function update()
+    {
+        if ($this->isNew()) {
+            return;
+        }
+
+        $values = [];
+        $params = [];
+        foreach ($this as $key => $val) {
+            if ('id' === $key) {
+                continue;
+            }
+
+            $values[] = $key . '=' . ' :' . $key;
+            $params[':'.$key] = $val;
+        }
+
+        $sql = 'UPDATE ' . static::TABLE . ' SET '. implode(',', $values) .' WHERE id=:id';
+        $db = Db::instance();
+        $db->execute($sql, array_merge($params, [':id' => $this->id]));
+    }
+
+    public function save()
+    {
+        if ($this->isNew()) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
+    }
+
+    public function delete($id = null)
+    {
+        // TODO
     }
 }

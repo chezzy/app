@@ -32,6 +32,11 @@ class Db
         return [];
     }
 
+    public function getId()
+    {
+        $this->dbh->lastInsertId();
+    }
+
     private function connect()
     {
         $this->dbh = new \PDO('mysql:dbname=app;host=127.0.0.1', 'root', '');

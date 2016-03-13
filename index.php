@@ -7,6 +7,8 @@ require __DIR__ . '/autoload.php';
 //include 'App/Views/index.php';
 
 $user = new \App\Models\User();
-$user->email = 'fuck';
 
-$user->insert();
+$user->email = 'fuck2332';
+$user->name = 'fuck233333';
+
+$user->save();
