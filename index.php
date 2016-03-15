@@ -2,13 +2,7 @@
 
 require __DIR__ . '/autoload.php';
 
-//$news = \App\Models\News::findAll();
+$app = new App\Controllers\FrontController();
+$app->run();
 
-//include 'App/Views/index.php';
-
-$user = new \App\Models\User();
-
-$user->email = 'fuck2332';
-$user->name = 'fuck233333';
-
-$user->save();
+var_dump($app);

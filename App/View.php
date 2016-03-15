@@ -4,12 +4,12 @@ namespace App;
 
 
 class View
-    implements Countable, Iterator
+    implements \Countable, \Iterator
 {
     protected $path;
     protected $data = [];
 
-    public function __construct($path)
+    public function __construct($path = null)
     {
         $this->path = $path;
     }
@@ -31,7 +31,7 @@ class View
 
     public function render($template, $data = [], $return = false)
     {
-        foreach ($this->data as $k => $v) {
+/*        foreach ($this->data as $k => $v) {
             $$k = $v;
         }
 
@@ -44,7 +44,7 @@ class View
             return $content;
         }
 
-        echo $content;
+        echo $content;*/
     }
 
     public function display($template)
