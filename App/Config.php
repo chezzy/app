@@ -20,13 +20,17 @@ class Config
         return self::$instance;
     }
 
-    public function setConfig($key, $val)
+    public function set($key, $val)
     {
         $this->config[$key] = $val;
     }
 
-    public function getConfig($key)
+    public function get($key)
     {
-        return $this->config[$key];
+        if (isset($this->config[$key])) {
+            return $this->config[$key];
+        }
+
+        return false;
     }
 }
