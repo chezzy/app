@@ -90,7 +90,7 @@ class Model
         }
     }
 
-    public function delete($id = null)
+    public function delete()
     {
         // TODO
     }
