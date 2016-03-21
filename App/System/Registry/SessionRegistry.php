@@ -1,6 +1,6 @@
 <?php
 
-namespace App\System;
+namespace App\System\Registry;
 
 
 class SessionRegistry extends Registry
