@@ -1,3 +1,3 @@
 <?php return [
-    'news' => 'news/index'
+    'news' => 'news/index',
 ];

@@ -6,11 +6,18 @@ namespace App\System\Routes;
 class Router
 {
     private $routes;
+    private $controller;
+    private $action;
+    private $namespace;
 
     public function __construct()
     {
-        $routesPath =  'App/System/Routes/routes.php';
-        $this->routes = include($routesPath);
+        $routesPath =  __DIR__ . '/routes.php';
+        if (!file_exists($routesPath)) {
+            return null;
+        }
+
+        $this->routes = require_once $routesPath;
     }
 
     public function run()
@@ -18,20 +25,30 @@ class Router
         $uri = $this->getURI();
 
         foreach ($this->routes as $uriPattern => $path) {
-
             if (preg_match("~$uriPattern~", $uri)) {
+                $segments = explode('/', $path);
+                $this->controller = ucfirst(array_shift($segments)).'Controller';
+                $this->action = 'action'.ucfirst(array_shift($segments));
+                $this->namespace = 'App\Controllers';
 
-                $segments = explode ($path, '/');
+                $result = $this->process();
 
-                $controller = ucfirst(array_shift($segments)).'Controller';
-                $action = array_shift($segments);
-
-
+                if (null != $result) {
+                    break;
+                }
             }
         }
 
     }
-    
+
+    private function process()
+    {
+        $class = '\\' . $this->namespace . '\\' . $this->controller;
+        $controller = new $class();
+        $action = $this->action;
+        return $controller->$action();
+    }
+
     private function getURI()
     {
         if (!empty($_SERVER['REQUEST_URI'])) {
@@ -39,5 +56,5 @@ class Router
         }
     }
 
-    
+
 }
