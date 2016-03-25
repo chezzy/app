@@ -39,7 +39,6 @@ class Router
                 }
             }
         }
-
     }
 
     private function process($params)
